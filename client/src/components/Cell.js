@@ -5,7 +5,7 @@ const Cell = ({onSweep, dangerLevel, flagged, hidden}) =>
 
 
 const cellValue = (dangerLevel) => {
-    switch (-1) {
+    switch (dangerLevel) {
         case -1: return <img src="images/mine.jpg" alt="" />
         case 0: return ""
         default: return dangerLevel
