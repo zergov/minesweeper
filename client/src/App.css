@@ -68,3 +68,7 @@ img {
 #coolGuy:hover {
   background-color: lightgray;
 }
+
+select {
+  margin: 5px;
+}
