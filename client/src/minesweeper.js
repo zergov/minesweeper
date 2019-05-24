@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 const cell = () => ({
   hidden: true,
   flag: false,
@@ -38,8 +40,22 @@ const neighbours = (width, height, index) => {
   return surounding.filter(({ x, y }) => x >= 0 && x < width && (y >= 0 && y < height)).map(({ x, y }) => x + width * y)
 }
 
-const initialize = game => {
-  const mines = new Array(game.mineCount).fill(game).map(() => Math.floor(Math.random() * (game.width * game.height)))
+const notInRadius = (distance, game, index) => i => {
+  const x = Math.floor(index % game.width)
+  const y = Math.floor(index / game.width)
+  const xx = Math.floor(i % game.width)
+  const yy = Math.floor(i / game.width)
+  return distance < Math.sqrt(((xx - x)**2) + ((yy - y)**2))
+}
+
+const initialize = (game, index) => {
+  const minesCandidates = new Array(game.width * game.height) // index candidates for mines
+    .fill(0)
+    .map((g, i) => i)
+    .filter(i => index !== i)
+    .filter(notInRadius(2, game, index))
+
+  const mines = _.shuffle(minesCandidates).slice(0, game.mineCount)
   const grid = game.grid
     .map((cell, i) => (mines.includes(i) ? { ...cell, value: -1 } : cell)) // assign mines
     .map((cell, i) => {
@@ -77,7 +93,7 @@ const gameState = grid => {
 }
 
 export const sweep = (game, index) => {
-  if (!game.initialized) game = initialize(game)
+  if (!game.initialized) game = initialize(game, index)
   if (game.state !== STATE_IN_GAME) return game
 
   const grid = expand([...game.grid], game.width, game.height, index)
