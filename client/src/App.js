@@ -21,9 +21,9 @@ function Game() {
 
   return (
     <div className="App">
+      <Settings size={size} setSize={setSize} difficulty={difficulty} setDifficulty={setDifficulty} />
       <GameStats minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} gameState={game.state} />
       <Grid onSweep={onSweep} onFlag={onFlag} grid={game.grid} />
-      <Settings size={size} setSize={setSize} difficulty={difficulty} setDifficulty={setDifficulty} />
     </div>
   )
 }
