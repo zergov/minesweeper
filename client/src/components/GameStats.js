@@ -38,7 +38,7 @@ export default ({ minesLeft, resetGame, startTime, gameState, onWin }) => {
   })
 
   return (
-    <div id="statsBar">
+    <div id="statsBar" style={{ marginRight: 400 }}>
       <div id="timer">{elapsedTime}</div>
       <div id="coolGuy">
         <span onClick={resetGame}>{coolGuy}</span>

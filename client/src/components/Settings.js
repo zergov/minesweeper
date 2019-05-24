@@ -2,7 +2,7 @@ import React from 'react'
 
 export default ({ setSize, setDifficulty, setTheme, onUsernameChange }) => {
   return (
-    <div className="settings">
+    <div className="settings" style={{ marginRight: 400 }}>
       <select id="difficulty" onChange={e => setDifficulty(Number(e.target.value))}>
         <option value={0.1}>Easy</option>
         <option value={0.15}>Medium</option>

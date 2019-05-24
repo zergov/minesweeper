@@ -48,7 +48,7 @@ function Game() {
         <div style={{ marginLeft: 24 }}>
           <h1>Latest Submission</h1>
           <ul>
-            { [...scoreboard].reverse().map(game => <li><strong>{game.username || "anonymous"} | </strong>{`${game.width} x ${game.height} | mine: ${game.mineCount}`}</li>) }
+            { [...scoreboard].map(game => <li><strong>{game.username || "anonymous"} | </strong>{`${game.width} x ${game.height} | mine: ${game.mineCount}`}</li>) }
           </ul>
         </div>
       </div>
