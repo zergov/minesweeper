@@ -6,7 +6,7 @@ export default ({ grid, onSweep }) => {
       <div className="wrapper grid">
         { grid.map((cell, i) => {
           return (
-            <Cell onSweep={() => onSweep(i)} key={i} dangerLevel={0} flag={false} hidden={cell.hidden} />
+            <Cell onSweep={() => onSweep(i)} key={i} dangerLevel={cell.value} flag={false} hidden={cell.hidden} />
           )
         }) }
       </div>

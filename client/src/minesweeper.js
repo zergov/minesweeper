@@ -18,7 +18,6 @@ export const createGame = (width, height) => {
 }
 
 const initialize = game => {
-  console.log('initializing game...')
   const mines = new Array(game.mineCount)
     .fill(game)
     .map(() => Math.floor(Math.random() * (game.width * game.height)))
