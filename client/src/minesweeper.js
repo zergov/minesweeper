@@ -79,6 +79,6 @@ export const flag = (game, index) => {
   const flagCount = game.grid[index].flag ? game.flagCount - 1 : game.flagCount + 1
   if (flagCount > game.mineCount) return game // you cannot put more flag than there is bombs
 
-  const grid = game.grid.map((cell, i) => index == i ? {...cell, flag: !cell.flag } : cell)
+  const grid = game.grid.map((cell, i) => (index == i ? { ...cell, flag: !cell.flag } : cell))
   return { ...game, grid, flagCount }
 }

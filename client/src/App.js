@@ -10,15 +10,17 @@ function Game() {
   const onSweep = index => setGame(sweep(game, index))
   const onFlag = index => setGame(flag(game, index))
 
+  const boom = new Audio('boom.mp3')
   const resetGame = () => {
     setGame(createGame(10, 10))
+    boom.play()
   }
 
   let minesLeft = game.mineCount - game.flagCount
 
   return (
     <div className="App">
-      <GameStats minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} />
+      <GameStats minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} gameState={game.state} />
       <Grid onSweep={onSweep} onFlag={onFlag} grid={game.grid} />
     </div>
   )

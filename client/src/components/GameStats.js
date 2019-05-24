@@ -19,7 +19,7 @@ export default ({ minesLeft, resetGame, startTime, gameState }) => {
     return () => clearInterval(interval)
   })
 
-  let coolGuy = gameState === 'won' ? +'😎' : '🙂'
+  let coolGuy = gameState === 'won' ? +'😎' : gameState === 'lost' ? '😵' : '🙂'
 
   return (
     <div id="statsBar">
