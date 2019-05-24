@@ -69,3 +69,11 @@ export const sweep = (game, index) => {
     grid: expand([...game.grid], game.width, game.height, index)
   }
 }
+
+export const flag = (game, index) => {
+  if (!game.grid[index].hidden) return game // you cannot flag a visible cell
+
+  const flagCount = game.grid[index].flag ? game.flagCount - 1 : game.flagCount + 1
+  const grid = game.grid.map((cell, i) => index == i ? {...cell, flag: !cell.flag } : cell)
+  return { ...game, grid, flagCount }
+}
