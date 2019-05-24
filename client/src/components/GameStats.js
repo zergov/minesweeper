@@ -1,7 +1,7 @@
 import React from 'react'
 import Timer from './Timer'
 
-export default ({ mineCount, startTime, resetGame }) => {
+export default ({ mineCount, resetGame }) => {
   return (
     <div className="statsBar">
       <button id="coolGuy">

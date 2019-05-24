@@ -9,9 +9,13 @@ function Game() {
   const [game, setGame] = useState(createGame(10, 10))
   const onSweep = index => setGame(sweep(game, index))
 
+  const resetGame = () => {
+    setGame(createGame(10, 10))
+  }
+
   return (
     <div className="App">
-      <GameStats mineCount={game.mineCount} />
+      <GameStats mineCount={game.mineCount} resetGame={resetGame} />
       <Grid onSweep={onSweep} grid={game.grid} />
     </div>
   )
