@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
+import GameStats from './components/GameStats'
 import axios from 'axios'
 
-const cell = () => ({ hidden: true, flag: false, value: 0})
+const cell = () => ({ hidden: true, flag: false, value: 0 })
 const createGrid = (width, height) => new Array(width * height).fill(0).map(() => cell())
 
 function App() {
-  const width = 10;
-  const height = 10;
+  const width = 10
+  const height = 10
   const [grid, setGrid] = useState(createGrid(width, height))
 
   const onClick = index => {
@@ -23,13 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <main className="wrapper grid">
-        { grid.map((cell, i) => {
-          return (
-            <div onClick={() => onClick(i)} key={i}>{cell.hidden ? "" : cell.value}</div>
-          )
-        }) }
-      </main>
+      <GameStats />
     </div>
   )
 }
