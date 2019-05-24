@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
+import Grid from './components/Grid'
 import axios from 'axios'
 
 const cell = () => ({ hidden: true, flag: false, value: 0})
 const createGrid = (width, height) => new Array(width * height).fill(0).map(() => cell())
 
-function App() {
+function Game() {
   const width = 10;
   const height = 10;
   const [grid, setGrid] = useState(createGrid(width, height))
 
-  const onClick = index => {
+  const onSweep = index => {
     const x = index % width
     const y = Math.floor(index / width)
 
@@ -23,15 +24,10 @@ function App() {
 
   return (
     <div className="App">
-      <main className="wrapper grid">
-        { grid.map((cell, i) => {
-          return (
-            <div onClick={() => onClick(i)} key={i}>{cell.hidden ? "" : cell.value}</div>
-          )
-        }) }
-      </main>
+      <h1>make a stats component here :)</h1>
+      <Grid onSweep={onSweep} grid={grid} />
     </div>
   )
 }
 
-export default App
+export default Game
