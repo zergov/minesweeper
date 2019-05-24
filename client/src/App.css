@@ -33,3 +33,8 @@
 .cell.swept {
   background-color: rgb(179, 179, 179)
 }
+
+img {
+  width: 100%;
+  height: 100%;
+}
