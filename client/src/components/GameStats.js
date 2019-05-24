@@ -1,14 +1,31 @@
-import React from 'react'
-import Timer from './Timer'
+import React, { useState, useEffect } from 'react'
 
-export default ({ mineCount, startTime, resetGame }) => {
-  const faceFile = './media/coolGuySmile.png'
+export default ({ mineCount, resetGame, startTime, gameOn }) => {
+  const [elapsedTime, setElapsedTime] = useState('00:00')
+
+  const msToTime = duration => {
+    let seconds = Math.floor((duration / 1000) % 60)
+    let minutes = Math.floor((duration / (1000 * 60)) % 60)
+    minutes = minutes < 10 ? '0' + minutes : minutes
+    seconds = seconds < 10 ? '0' + seconds : seconds
+    return minutes + ':' + seconds
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setElapsedTime(msToTime(Date.now() - startTime))
+    }, 1000)
+
+    return () => clearInterval(interval)
+  })
 
   return (
     <div className="statsBar">
-      <Timer startTime={startTime} />
+      <span>{elapsedTime}</span>
       <button id="coolGuy">
-        <img src={faceFile} alt="A Cool Guy" onClick={resetGame} />
+        <span role="img" aria-label="Cool Dude" onClick={resetGame}>
+          &#x1F642;
+        </span>
       </button>
       <div id="mineCount">{mineCount}</div>
     </div>
