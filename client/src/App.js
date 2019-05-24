@@ -2,24 +2,25 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios'
 
+const cell = () => ({ hidden: false, flag: false, value: 0})
+const createGrid = (width, height) => new Array(width * height).fill(cell())
+
 function App() {
-  const [message, setMessage] = useState('...')
+  const width = 10;
+  const height = 10;
+  const [grid, setGrid] = useState(createGrid(width, height))
 
-  // Load the message only when the component mounts
-  useEffect(() => {
-    getMessage()
-  }, [])
-
-  async function getMessage() {
-    const response = await axios.get('/api')
-    setMessage(response.data)
+  const onClick = index => {
+    const x = index % width
+    const y = Math.floor(index / width)
+    console.log(`clicked on cell (${x}, ${y})`, grid[index])
   }
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>{message}</p>
-      </header>
+      <main className="wrapper grid">
+        { grid.map((cell, i) => <div onClick={() => onClick(i)} key={i}>{cell.value}</div>) }
+      </main>
     </div>
   )
 }
