@@ -29,7 +29,7 @@ const neighbours = (game, index) => {
     { x: x - 1, y: y + 1 },
     { x: x + 1, y: y - 1 }
   ]
-  return surounding.map(({ x, y }) => x + game.width * y)
+  return surounding.filter(({ x, y }) => x >= 0 && x < game.width && (y >= 0 && y < game.height)).map(({ x, y }) => x + game.width * y)
 }
 
 const initialize = game => {
@@ -40,8 +40,7 @@ const initialize = game => {
     .map((cell, i) => {
       if (cell.value == -1) return cell
 
-      const surounding = neighbours(game, i).filter(i => i < game.grid.length && i >= 0)
-      const value = surounding.filter(neighbour => mines.includes(neighbour))
+      const value = neighbours(game, i).filter(neighbour => mines.includes(neighbour))
       return { ...cell, value: value.length }
     })
 

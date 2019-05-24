@@ -11,7 +11,7 @@ function Game() {
 
   return (
     <div className="App">
-      <GameStats startTime={1} />
+      <GameStats mineCount={game.mineCount} />
       <Grid onSweep={onSweep} grid={game.grid} />
     </div>
   )
