@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({ size, setSize, difficulty, setDifficulty }) => {
+export default ({ setSize, setDifficulty, setTheme }) => {
   return (
     <div className="settings">
       <select id="difficulty" onChange={e => setDifficulty(Number(e.target.value))}>
@@ -14,6 +14,12 @@ export default ({ size, setSize, difficulty, setDifficulty }) => {
         <option value={10}>Small</option>
         <option value={20}>Medium</option>
         <option value={40}>Large</option>
+      </select>
+
+      <select id="theme" onChange={e => setTheme(e.target.value)}>
+        <option value={''}>Day</option>
+        <option value={'night'}>Night</option>
+        <option value={'unicorn'}>Unicorn</option>
       </select>
     </div>
   )
