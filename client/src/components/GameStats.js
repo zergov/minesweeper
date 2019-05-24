@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default ({ minesLeft, resetGame, startTime, gameOn }) => {
+export default ({ minesLeft, resetGame, startTime, gameState }) => {
   const [elapsedTime, setElapsedTime] = useState('00:00')
 
   const msToTime = duration => {
@@ -19,13 +19,15 @@ export default ({ minesLeft, resetGame, startTime, gameOn }) => {
     return () => clearInterval(interval)
   })
 
+  let coolGuy = gameState === 'won' ? +'&#x1F60E;' : '&#x1F642;'
+
   return (
     <div id="statsBar">
       <div id="timer">{elapsedTime}</div>
       <div>
         <button id="coolGuy">
           <span role="img" aria-label="Cool Dude" onClick={resetGame}>
-            &#x1F642;
+            {coolGuy}
           </span>
         </button>
       </div>
