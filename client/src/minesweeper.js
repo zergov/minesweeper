@@ -78,14 +78,22 @@ const gameState = grid => {
 
 export const sweep = (game, index) => {
   if (!game.initialized) game = initialize(game)
+  if (game.state !== STATE_IN_GAME) return game
 
   const grid = expand([...game.grid], game.width, game.height, index)
   const state = gameState(grid)
-  return { ...game, state, grid }
+
+  switch(state) {
+    case STATE_LOST:
+      return { ...game, state, grid: grid.map(cell => ({...cell, hidden: false}))}
+    default:
+      return { ...game, state, grid }
+  }
 }
 
 export const flag = (game, index) => {
   if (!game.grid[index].hidden) return game // you cannot flag a visible cell
+  if (game.state !== STATE_IN_GAME) return game
 
   const flagCount = game.grid[index].flag ? game.flagCount - 1 : game.flagCount + 1
   if (flagCount > game.mineCount) return game // you cannot put more flag than there is bombs
