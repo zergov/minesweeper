@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment'
 import './App.css'
 import GameStats from './components/GameStats'
 import { createGame, sweep, flag } from './minesweeper'
@@ -28,7 +29,7 @@ function Game() {
     const response = await fetch('http://localhost:4201/api/results', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(game),
+      body: JSON.stringify({...game, username: username}),
     })
   }
 
@@ -43,12 +44,12 @@ function Game() {
     <div className={'App ' + theme}>
       <Settings setSize={setSize} setDifficulty={setDifficulty} setTheme={setTheme} onUsernameChange={setUsername} />
       <GameStats onWin={onWin} minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} gameState={game.state} />
-      <div style={{ display: 'flex', flexDirection: 'rows'}}>
+      <div style={{ display: 'flex'}}>
         <Grid onSweep={onSweep} onFlag={onFlag} grid={game.grid} />
         <div style={{ marginLeft: 24 }}>
-          <h3>Scoreboard</h3>
+          <h1>Latest Submission</h1>
           <ul>
-            { scoreboard.map(game => <li>{`${game.width} x ${game.height} | mine: ${game.mineCount}`}</li>) }
+            { scoreboard.reverse().map(game => <li><strong>{game.username || "anonymous"} | </strong>{`${game.width} x ${game.height} | mine: ${game.mineCount}`}</li>) }
           </ul>
         </div>
       </div>

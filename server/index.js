@@ -14,10 +14,11 @@ app.use(bodyParser.json());
 app.get('/api/scoreboard', (req, res) => res.json(server.scoreboard))
 app.post('/api/results', (req, res) => {
   const game = {
+    username: req.body.username,
     width: req.body.width,
     height: req.body.height,
     mineCount: req.body.mineCount,
-    startTime: req.body.startTime,
+    duration: Math.abs(req.body.endTime - req.body.startTime)
   }
 
   server.scoreboard = [...server.scoreboard, game]

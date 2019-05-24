@@ -18,9 +18,10 @@ export const createGame = (width, height, difficulty) => {
     height,
     initialized: false,
     flagCount: 0,
-    mineCount: 1,//Math.floor(difficulty * width * height),
+    mineCount: Math.floor(difficulty * width * height),
     grid: createGrid(width, height),
-    startTime: Date.now()
+    startTime: Date.now(),
+    endTime: null,
   }
 }
 
@@ -101,9 +102,9 @@ export const sweep = (game, index) => {
 
   switch (state) {
     case STATE_LOST:
-      return { ...game, state, grid: grid.map((cell, i) => ({ ...cell, hidden: false, value: index == i ? -2 : cell.value })) }
+      return { ...game, state, grid: grid.map((cell, i) => ({ ...cell, hidden: false, value: index == i ? -2 : cell.value, endTime: Date.now()})) }
     case STATE_WON:
-      return { ...game, state, grid: grid.map(cell => ({ ...cell, hidden: false, flag: cell.value === -1 })) }
+      return { ...game, state, grid: grid.map(cell => ({ ...cell, hidden: false, flag: cell.value === -1, endTime: Date.now() })) }
     default:
       return { ...game, state, grid }
   }
