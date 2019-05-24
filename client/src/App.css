@@ -29,3 +29,7 @@
   grid-auto-rows: 40px;
   grid-template-columns: repeat(auto-fill, 40px);
 }
+
+.cell.swept {
+  background-color: rgb(179, 179, 179)
+}
