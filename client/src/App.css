@@ -49,3 +49,16 @@ img {
 #timer {
   width: 50px;
 }
+
+#coolGuy {
+  width: 50px;
+  font-size: 200%;
+  text-align: center;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding-top: 5px;
+}
+
+#coolGuy:hover {
+  background-color: lightgray;
+}

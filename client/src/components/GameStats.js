@@ -19,17 +19,13 @@ export default ({ minesLeft, resetGame, startTime, gameState }) => {
     return () => clearInterval(interval)
   })
 
-  let coolGuy = gameState === 'won' ? +'&#x1F60E;' : '&#x1F642;'
+  let coolGuy = gameState === 'won' ? +'😎' : '🙂'
 
   return (
     <div id="statsBar">
       <div id="timer">{elapsedTime}</div>
-      <div>
-        <button id="coolGuy">
-          <span role="img" aria-label="Cool Dude" onClick={resetGame}>
-            {coolGuy}
-          </span>
-        </button>
+      <div id="coolGuy">
+        <span onClick={resetGame}>{coolGuy}</span>
       </div>
       <div id="mineCount">{minesLeft}</div>
     </div>
