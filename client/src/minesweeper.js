@@ -9,14 +9,14 @@ const createGrid = (width, height) => new Array(width * height).fill(0).map(cell
 const STATE_IN_GAME = 'IN_GAME'
 const STATE_LOST = 'LOST'
 const STATE_WON = 'WIN'
-export const createGame = (width, height) => {
+export const createGame = (width, height, difficulty) => {
   return {
     state: STATE_IN_GAME,
     width,
     height,
     initialized: false,
     flagCount: 0,
-    mineCount: 10,
+    mineCount: Math.floor(difficulty * width * height),
     grid: createGrid(width, height),
     startTime: Date.now()
   }
