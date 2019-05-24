@@ -26,6 +26,9 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
+  border: 2px solid #c2f192;
+  border-radius: 5px;
+
 }
 
 /* .grid { */
