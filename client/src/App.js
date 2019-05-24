@@ -10,6 +10,7 @@ function Game() {
   const [game, setGame] = useState(createGame(10, 10, 0.1))
   const [size, setSize] = useState(10)
   const [difficulty, setDifficulty] = useState(0.1)
+  const [theme, setTheme] = useState('')
   const onSweep = index => setGame(sweep(game, index))
   const onFlag = index => setGame(flag(game, index))
 
@@ -20,8 +21,8 @@ function Game() {
   let minesLeft = game.mineCount - game.flagCount
 
   return (
-    <div className="App">
-      <Settings size={size} setSize={setSize} difficulty={difficulty} setDifficulty={setDifficulty} />
+    <div className={'App ' + theme}>
+      <Settings setSize={setSize} setDifficulty={setDifficulty} setTheme={setTheme} />
       <GameStats minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} gameState={game.state} />
       <Grid onSweep={onSweep} onFlag={onFlag} grid={game.grid} />
     </div>
