@@ -1,5 +1,9 @@
 import React from 'react'
 
 export default ({ startTime }) => {
-  return <div />
+  return (
+    <div>
+      <span>00:05</span>
+    </div>
+  )
 }
