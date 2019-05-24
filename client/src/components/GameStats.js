@@ -20,13 +20,15 @@ export default ({ minesLeft, resetGame, startTime, gameOn }) => {
   })
 
   return (
-    <div className="statsBar">
-      <div>{elapsedTime}</div>
-      <button id="coolGuy">
-        <span role="img" aria-label="Cool Dude" onClick={resetGame}>
-          &#x1F642;
-        </span>
-      </button>
+    <div id="statsBar">
+      <div id="timer">{elapsedTime}</div>
+      <div>
+        <button id="coolGuy">
+          <span role="img" aria-label="Cool Dude" onClick={resetGame}>
+            &#x1F642;
+          </span>
+        </button>
+      </div>
       <div id="mineCount">{minesLeft}</div>
     </div>
   )
