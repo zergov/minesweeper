@@ -10,11 +10,7 @@ export default ({ setSize, setDifficulty, setTheme }) => {
         <option value={0.5}>INSANITY</option>
       </select>
 
-      <select id="size" onChange={e => setSize(Number(e.target.value))}>
-        <option value={10}>Small</option>
-        <option value={20}>Medium</option>
-        <option value={40}>Large</option>
-      </select>
+      <input type="number" placeholder="Size" onChange={e => setSize(Number(e.target.value))} />
 
       <select id="theme" onChange={e => setTheme(e.target.value)}>
         <option value={''}>Day</option>
