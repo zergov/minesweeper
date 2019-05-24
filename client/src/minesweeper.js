@@ -40,8 +40,8 @@ const initialize = game => {
     .map((cell, i) => {
       if (cell.value == -1) return cell
 
-      const value = neighbours(game, i).filter(neighbour => mines.includes(neighbour))
-      return {...cell, value: value.length}
+      const value = neighbours(game, i).filter(neighbour => mines.includes(neighbour)).length
+      return {...cell, value}
     })
 
   return {...game, initialized: true, grid}
