@@ -13,9 +13,11 @@ function Game() {
     setGame(createGame(10, 10))
   }
 
+  let minesLeft = game.mineCount - game.flagCount
+
   return (
     <div className="App">
-      <GameStats mineCount={game.mineCount} resetGame={resetGame} startTime={game.startTime} gameOn={true} />
+      <GameStats minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} />
       <Grid onSweep={onSweep} grid={game.grid} />
     </div>
   )
