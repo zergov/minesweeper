@@ -10,18 +10,23 @@ export const createGame = (width, height) => {
   return {
     width,
     height,
+    initialized: false,
+    mineCount: Math.floor((width * height) / 10),
     grid: createGrid(width, height)
   }
 }
 
+const initialize = game => {
+  const mines = new Array(game.mineCount).fill(game).map(() => Math.floor(Math.random() * (game.width * game.height)))
+
+  const grid = game.grid.map((cell, i) => (mines.includes(i) ? { ...cell, value: -1 } : cell))
+  return { ...game, initialized: true, grid }
+}
+
 export const sweep = (game, index) => {
-  const x = index % game.width
-  const y = Math.floor(index / game.width)
-  const grid = [...game.grid]
-  const cell = grid[index]
+  // if the game is not initialized, generate and add mines to the grid
+  if (!game.initialized) game = initialize(game)
 
-  console.log(`clicked on cell (${x}, ${y})`, cell)
-  grid[index] = { ...cell, hidden: false }
-
+  const grid = game.grid.map((cell, i) => (i == index ? { ...cell, hidden: false } : cell))
   return { ...game, grid }
 }
