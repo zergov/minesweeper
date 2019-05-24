@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-export default ({ mineCount, resetGame, startTime }) => {
-  const [elapsedTime, setElapsedTime] = useState(startTime)
+export default ({ mineCount, resetGame, startTime, gameOn }) => {
+  const [elapsedTime, setElapsedTime] = useState('00:00')
 
   const msToTime = duration => {
     let seconds = Math.floor((duration / 1000) % 60)
@@ -19,7 +19,7 @@ export default ({ mineCount, resetGame, startTime }) => {
     <div className="statsBar">
       <span>{elapsedTime}</span>
       <button id="coolGuy">
-        <span role="img" ariaLabel="Cool Dude" onClick={resetGame}>
+        <span role="img" aria-label="Cool Dude" onClick={resetGame}>
           &#x1F642;
         </span>
       </button>
