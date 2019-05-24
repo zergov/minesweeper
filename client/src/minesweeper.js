@@ -86,6 +86,8 @@ export const sweep = (game, index) => {
   switch(state) {
     case STATE_LOST:
       return { ...game, state, grid: grid.map(cell => ({...cell, hidden: false}))}
+    case STATE_WON:
+      return { ...game, state, grid: grid.map(cell => ({ ...cell, hidden: false, flag: (cell.value === -1) }))}
     default:
       return { ...game, state, grid }
   }
