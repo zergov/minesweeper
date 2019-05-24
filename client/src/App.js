@@ -19,7 +19,7 @@ function Game() {
   return (
     <div className="App">
       <GameStats minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} />
-      <Grid onSweep={onSweep} grid={game.grid} />
+      <Grid onSweep={onSweep} onFlag={onFlag} grid={game.grid} />
     </div>
   )
 }

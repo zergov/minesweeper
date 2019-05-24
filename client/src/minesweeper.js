@@ -50,10 +50,13 @@ const initialize = game => {
 
 const expand = (grid, width, height, index) => {
   const cell = grid[index]
+
+  if (cell.flag) return grid
+
   grid[index] = { ...cell, hidden: false }
 
+  if (!cell.hidden) return grid
   if (cell.value !== 0) return grid // if its a bomb or a value
-  if (!cell.hidden) return grid // if its a bomb or a value
 
   grid[index] = { ...cell, hidden: false }
 
