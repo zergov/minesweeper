@@ -21,8 +21,7 @@ function Game() {
 
   const fetchScoreboard = async () => {
     const response = await fetch('http://localhost:4201/api/scoreboard')
-    const scoreboard = await response.json()
-    setScoreboard(scoreboard)
+    setScoreboard(await response.json())
   }
 
   const pushResults = async () => {
@@ -49,7 +48,7 @@ function Game() {
         <div style={{ marginLeft: 24 }}>
           <h1>Latest Submission</h1>
           <ul>
-            { scoreboard.reverse().map(game => <li><strong>{game.username || "anonymous"} | </strong>{`${game.width} x ${game.height} | mine: ${game.mineCount}`}</li>) }
+            { [...scoreboard].reverse().map(game => <li><strong>{game.username || "anonymous"} | </strong>{`${game.width} x ${game.height} | mine: ${game.mineCount}`}</li>) }
           </ul>
         </div>
       </div>
