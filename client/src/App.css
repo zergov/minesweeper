@@ -11,7 +11,7 @@
 }
 
 .wrapper > div {
-  outline: 1px solid black;
+  outline: none;
   display: flex;
   justify-content: center;
   align-items: center;
