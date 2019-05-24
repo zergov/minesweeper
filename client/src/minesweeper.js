@@ -6,8 +6,12 @@ const cell = () => ({
 
 const createGrid = (width, height) => new Array(width * height).fill(0).map(cell)
 
+const STATE_IN_GAME = "IN_GAME"
+const STATE_LOST = "LOST"
+const STATE_WON = "WIN"
 export const createGame = (width, height) => {
   return {
+    state: STATE_IN_GAME,
     width,
     height,
     initialized: false,
@@ -64,13 +68,20 @@ const expand = (grid, width, height, index) => {
   return surounding.reduce((grid, neighbour) => expand(grid, width, height, neighbour), grid)
 }
 
+const win = grid => grid.filter(cell => cell.value !== -1).every(cell => !cell.hidden)
+const lose = grid => grid.filter(cell => cell.value == -1).some(cell => !cell.hidden)
+const gameState = grid => {
+  if (win(grid)) return STATE_WON
+  if (lose(grid)) return STATE_LOST
+  return STATE_IN_GAME
+}
+
 export const sweep = (game, index) => {
   if (!game.initialized) game = initialize(game)
 
-  return {
-    ...game,
-    grid: expand([...game.grid], game.width, game.height, index)
-  }
+  const grid = expand([...game.grid], game.width, game.height, index)
+  const state = gameState(grid)
+  return { ...game, state, grid }
 }
 
 export const flag = (game, index) => {
