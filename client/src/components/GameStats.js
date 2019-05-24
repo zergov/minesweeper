@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default ({ mineCount, resetGame, startTime, gameOn }) => {
   const [elapsedTime, setElapsedTime] = useState('00:00')
@@ -11,9 +11,13 @@ export default ({ mineCount, resetGame, startTime, gameOn }) => {
     return minutes + ':' + seconds
   }
 
-  setInterval(() => {
-    setElapsedTime(msToTime(Date.now() - startTime))
-  }, 1000)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setElapsedTime(msToTime(Date.now() - startTime))
+    }, 1000)
+
+    return () => clearInterval(interval)
+  })
 
   return (
     <div className="statsBar">
