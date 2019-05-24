@@ -11,7 +11,7 @@ export const createGame = (width, height) => {
     width,
     height,
     initialized: false,
-    mineCount: 25,
+    mineCount: 60,
     grid: createGrid(width, height),
   })
 }
@@ -38,9 +38,9 @@ const initialize = game => {
     .map((cell, i) => {
       if (cell.value == -1) return cell
 
-      const surounding = neighbours(game, i).filter(i => i < game.grid.length)
-      const value = surounding.filter(neighbour => mines.includes(neighbour)).length
-      return {...cell, value}
+      const surounding = neighbours(game, i).filter(i => i < game.grid.length && i >= 0)
+      const value = surounding.filter(neighbour => mines.includes(neighbour))
+      return {...cell, value: value.length}
     })
 
   return {...game, initialized: true, grid}
