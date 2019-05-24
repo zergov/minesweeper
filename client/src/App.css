@@ -50,6 +50,10 @@ img {
   width: 50px;
 }
 
+#mineCount {
+  width: 20px;
+}
+
 #coolGuy {
   width: 50px;
   font-size: 200%;
