@@ -33,3 +33,9 @@
 .cell.swept {
   background-color: rgb(179, 179, 179)
 }
+
+.cell.swept img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
