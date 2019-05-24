@@ -6,9 +6,9 @@ const cell = () => ({
 
 const createGrid = (width, height) => new Array(width * height).fill(0).map(cell)
 
-const STATE_IN_GAME = "IN_GAME"
-const STATE_LOST = "LOST"
-const STATE_WON = "WIN"
+const STATE_IN_GAME = 'IN_GAME'
+const STATE_LOST = 'LOST'
+const STATE_WON = 'WIN'
 export const createGame = (width, height) => {
   return {
     state: STATE_IN_GAME,
@@ -83,11 +83,11 @@ export const sweep = (game, index) => {
   const grid = expand([...game.grid], game.width, game.height, index)
   const state = gameState(grid)
 
-  switch(state) {
+  switch (state) {
     case STATE_LOST:
-      return { ...game, state, grid: grid.map((cell, i) => ({...cell, hidden: false, value: index == i ? -2 : cell.value }))}
+      return { ...game, state, grid: grid.map((cell, i) => ({ ...cell, hidden: false, value: index == i ? -2 : cell.value })) }
     case STATE_WON:
-      return { ...game, state, grid: grid.map(cell => ({ ...cell, hidden: false, flag: (cell.value === -1) }))}
+      return { ...game, state, grid: grid.map(cell => ({ ...cell, hidden: false, flag: cell.value === -1 })) }
     default:
       return { ...game, state, grid }
   }

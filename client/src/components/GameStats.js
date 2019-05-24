@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react'
+const dananananaaaanaaaaananana = new Audio('win.mp3')
 
 export default ({ minesLeft, resetGame, startTime, gameState }) => {
   const [elapsedTime, setElapsedTime] = useState('00:00')
+
+  const checkState = state => {
+    switch (state) {
+      case 'WIN':
+        dananananaaaanaaaaananana.play()
+        return '😎'
+      case 'LOST':
+        return '😵'
+      default:
+        return '🙂'
+    }
+  }
+
+  const coolGuy = checkState(gameState)
 
   const msToTime = duration => {
     let seconds = Math.floor((duration / 1000) % 60)
@@ -12,14 +27,14 @@ export default ({ minesLeft, resetGame, startTime, gameState }) => {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setElapsedTime(msToTime(Date.now() - startTime))
-    }, 1000)
-
+    const interval =
+      gameState === 'IN_GAME'
+        ? setInterval(() => {
+            setElapsedTime(msToTime(Date.now() - startTime))
+          }, 1000)
+        : ''
     return () => clearInterval(interval)
   })
-
-  let coolGuy = gameState === 'won' ? +'😎' : gameState === 'lost' ? '😵' : '🙂'
 
   return (
     <div id="statsBar">
