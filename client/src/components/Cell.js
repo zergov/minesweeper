@@ -1,7 +1,7 @@
 import React from 'react'
-const Cell = ({ onSweep, onFlag, dangerLevel, flagged, hidden, index }) => {
+const Cell = ({style, onSweep, onFlag, dangerLevel, flagged, hidden, index}) => {
   return (
-    <div className={!hidden ? 'cell swept' : 'cell'} onClick={onSweep} onContextMenu={onFlag} flag={flagged}>
+    <div style={{...style}} className={(!hidden) ? "cell swept" : "cell"} onClick={onSweep} onContextMenu={onFlag} flag={flagged}>
       {cellValue(hidden, dangerLevel, flagged, index)}
     </div>
   )

@@ -6,10 +6,6 @@
   align-items: center;
 }
 
-.wrapper {
-  width: 400px;
-}
-
 .wrapper > div {
   outline: none;
   display: flex;
@@ -24,11 +20,16 @@
 }
 
 .grid {
-  display: grid;
-  grid-auto-columns: 40px;
-  grid-auto-rows: 40px;
-  grid-template-columns: repeat(auto-fill, 40px);
+  display: flex;
+  flex-wrap: wrap;
 }
+
+/* .grid { */
+  /* display: grid; */
+  /* grid-auto-columns: 40px; */
+  /* grid-auto-rows: 40px; */
+  /* grid-template-columns: repeat(auto-fill, 40px); */
+/* } */
 
 .cell.swept {
   background-color: lightblue;
