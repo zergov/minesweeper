@@ -12,7 +12,8 @@ export const createGame = (width, height) => {
     height,
     initialized: false,
     mineCount: 60,
-    grid: createGrid(width, height)
+    grid: createGrid(width, height),
+    startTime: Date.now()
   }
 }
 
