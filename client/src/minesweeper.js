@@ -50,10 +50,13 @@ const initialize = game => {
 
 const expand = (grid, width, height, index) => {
   const cell = grid[index]
+
+  if (cell.flag) return grid
+
   grid[index] = { ...cell, hidden: false }
 
+  if (!cell.hidden) return grid
   if (cell.value !== 0) return grid // if its a bomb or a value
-  if (!cell.hidden) return grid // if its a bomb or a value
 
   grid[index] = { ...cell, hidden: false }
 
@@ -68,4 +71,14 @@ export const sweep = (game, index) => {
     ...game,
     grid: expand([...game.grid], game.width, game.height, index)
   }
+}
+
+export const flag = (game, index) => {
+  if (!game.grid[index].hidden) return game // you cannot flag a visible cell
+
+  const flagCount = game.grid[index].flag ? game.flagCount - 1 : game.flagCount + 1
+  if (flagCount > game.mineCount) return game // you cannot put more flag than there is bombs
+
+  const grid = game.grid.map((cell, i) => index == i ? {...cell, flag: !cell.flag } : cell)
+  return { ...game, grid, flagCount }
 }
