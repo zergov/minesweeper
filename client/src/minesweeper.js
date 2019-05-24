@@ -10,18 +10,47 @@ export const createGame = (width, height) => {
   return {
     width,
     height,
+    initialized: false,
+    mineCount: 40,
     grid: createGrid(width, height)
   }
 }
 
-export const sweep = (game, index) => {
-  const x = index % game.width
+const neighbours = (game, index) => {
+  const x = Math.floor(index % game.width)
   const y = Math.floor(index / game.width)
-  const grid = [...game.grid]
-  const cell = grid[index]
+  const surounding = [
+    { x: x + 1, y },
+    { x: x - 1, y },
+    { x, y: y + 1 },
+    { x, y: y - 1 },
+    { x: x + 1, y: y + 1 },
+    { x: x - 1, y: y - 1 },
+    { x: x - 1, y: y + 1 },
+    { x: x + 1, y: y - 1 }
+  ]
+  return surounding.filter(({ x, y }) => x >= 0 && x < game.width && (y >= 0 && y < game.height)).map(({ x, y }) => x + game.width * y)
+}
 
-  console.log(`clicked on cell (${x}, ${y})`, cell)
-  grid[index] = { ...cell, hidden: false }
+const initialize = game => {
+  const mines = new Array(game.mineCount).fill(game).map(() => Math.floor(Math.random() * (game.width * game.height)))
 
+  const grid = game.grid
+    .map((cell, i) => (mines.includes(i) ? { ...cell, value: -1 } : cell)) // assign mines
+    .map((cell, i) => {
+      if (cell.value == -1) return cell
+
+      const value = neighbours(game, i).filter(neighbour => mines.includes(neighbour))
+      return { ...cell, value: value.length }
+    })
+
+  return { ...game, initialized: true, grid }
+}
+
+export const sweep = (game, index) => {
+  // if the game is not initialized, generate and add mines to the grid
+  if (!game.initialized) game = initialize(game)
+
+  const grid = game.grid.map((cell, i) => (i == index ? { ...cell, hidden: false } : cell))
   return { ...game, grid }
 }
