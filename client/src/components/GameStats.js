@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 const dananananaaaanaaaaananana = new Audio('win.mp3')
 
-export default ({ minesLeft, resetGame, startTime, gameState }) => {
+export default ({ minesLeft, resetGame, startTime, gameState, onWin }) => {
   const [elapsedTime, setElapsedTime] = useState('00:00')
 
   const checkState = state => {
     switch (state) {
       case 'WIN':
+        onWin()
         dananananaaaanaaaaananana.play()
         return '😎'
       case 'LOST':

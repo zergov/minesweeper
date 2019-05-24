@@ -18,7 +18,7 @@ export const createGame = (width, height, difficulty) => {
     height,
     initialized: false,
     flagCount: 0,
-    mineCount: Math.floor(difficulty * width * height),
+    mineCount: 1,//Math.floor(difficulty * width * height),
     grid: createGrid(width, height),
     startTime: Date.now()
   }

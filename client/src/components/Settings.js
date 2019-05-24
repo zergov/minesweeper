@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default ({ setSize, setDifficulty, setTheme }) => {
+export default ({ setSize, setDifficulty, setTheme, onUsernameChange }) => {
   return (
     <div className="settings">
       <select id="difficulty" onChange={e => setDifficulty(Number(e.target.value))}>
@@ -21,6 +21,8 @@ export default ({ setSize, setDifficulty, setTheme }) => {
         <option value={'night'}>Night</option>
         <option value={'unicorn'}>Unicorn</option>
       </select>
+
+      <input type="text" onChange={e => {onUsernameChange(e.target.value)}} placeholder="username" />
     </div>
   )
 }

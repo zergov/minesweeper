@@ -7,6 +7,7 @@ import Settings from './components/Settings'
 // import axios from 'axios'
 
 function Game() {
+  const [username, setUsername] = useState("")
   const [game, setGame] = useState(createGame(10, 10, 0.1))
   const [size, setSize] = useState(10)
   const [difficulty, setDifficulty] = useState(0.1)
@@ -18,12 +19,16 @@ function Game() {
     setGame(createGame(size, size, difficulty))
   }
 
+  const onWin = () => {
+    console.log(`${username}`, game)
+  }
+
   let minesLeft = game.mineCount - game.flagCount
 
   return (
     <div className={'App ' + theme}>
-      <Settings setSize={setSize} setDifficulty={setDifficulty} setTheme={setTheme} />
-      <GameStats minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} gameState={game.state} />
+      <Settings setSize={setSize} setDifficulty={setDifficulty} setTheme={setTheme} onUsernameChange={setUsername} />
+      <GameStats onWin={onWin} minesLeft={minesLeft} resetGame={resetGame} startTime={game.startTime} gameState={game.state} />
       <Grid onSweep={onSweep} onFlag={onFlag} grid={game.grid} />
     </div>
   )
