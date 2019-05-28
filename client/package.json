@@ -30,12 +30,6 @@
     ]
   },
   "proxy": "http://localhost:4201/",
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "printWidth": 160
-  },
   "devDependencies": {
     "axios": "^0.18.0"
   }
